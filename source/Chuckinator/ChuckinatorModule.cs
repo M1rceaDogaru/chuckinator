@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Chuckinator.Models;
+using Chuckinator.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace Chuckinator
@@ -14,6 +15,7 @@ namespace Chuckinator
 
             var settings = config.GetRequiredSection("Settings").Get<Settings>();
             builder.Register(ctx => settings).AsSelf();
+            builder.RegisterType<JokeRetriever>().As<IJokeRetriever>();
         }
     }
 }
