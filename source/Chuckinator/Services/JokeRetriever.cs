@@ -7,21 +7,20 @@ namespace Chuckinator.Services
 {
     internal class JokeRetriever : IJokeRetriever
     {
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _jokesApiUrl;
+        private readonly HttpClient _httpClient;
 
-        public JokeRetriever(IHttpClientFactory httpClientFactory, Settings settings)
+        public JokeRetriever(HttpClient httpClient, Settings settings)
         {
-            _httpClientFactory = httpClientFactory;
             _jokesApiUrl = settings.JokesApiUrl;
+            _httpClient = httpClient;
         }
 
         public async Task<OneOf<Success<Joke>, Error>> GetJoke()
         {
             try
             {
-                var client = _httpClientFactory.CreateClient();
-                HttpResponseMessage response = await client.GetAsync(_jokesApiUrl);
+                HttpResponseMessage response = await _httpClient.GetAsync(_jokesApiUrl);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();

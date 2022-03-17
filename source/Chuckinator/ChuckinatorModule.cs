@@ -17,6 +17,7 @@ namespace Chuckinator
             builder.Register(ctx => settings).AsSelf();
             builder.RegisterType<JokeRetriever>().As<IJokeRetriever>();
             builder.RegisterType<JokeService>().As<IJokeService>();
+            builder.Register(c => new HttpClient()).As<HttpClient>();
             builder.RegisterType<Application>().AsSelf();
         }
     }
