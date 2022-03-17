@@ -1,11 +1,12 @@
 ﻿using Chuckinator.Models;
+using OneOf;
 
 namespace Chuckinator.Services
 {
     internal interface IJokeService
     {
-        Task<Joke> GetRandomJoke();
-        Task<Joke> GetPreviousJoke();
-        Task<Joke> GetNextJoke();
+        Task<OneOf<Joke, NoJoke>> GetRandomJoke();
+        Task<OneOf<Joke, NoJoke>> GetPreviousJoke();
+        Task<OneOf<Joke, NoJoke>> GetNextJoke();
     }
 }

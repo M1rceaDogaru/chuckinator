@@ -16,6 +16,7 @@ namespace Chuckinator
             var settings = config.GetRequiredSection("Settings").Get<Settings>();
             builder.Register(ctx => settings).AsSelf();
             builder.RegisterType<JokeRetriever>().As<IJokeRetriever>();
+            builder.RegisterType<JokeService>().As<IJokeService>();
         }
     }
 }
