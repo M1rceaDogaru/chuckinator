@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chuckinator
+﻿namespace Chuckinator
 {
     internal class Application
     {
+        public async Task Run()
+        {
+
+        }
     }
 }
