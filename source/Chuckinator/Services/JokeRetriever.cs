@@ -1,5 +1,7 @@
 ﻿using Chuckinator.Models;
 using Newtonsoft.Json;
+using OneOf;
+using OneOf.Types;
 
 namespace Chuckinator.Services
 {
@@ -14,7 +16,7 @@ namespace Chuckinator.Services
             _jokesApiUrl = settings.JokesApiUrl;
         }
 
-        public async Task<Joke> GetJoke()
+        public async Task<OneOf<Success<Joke>, Error>> GetJoke()
         {
             try
             {
@@ -23,15 +25,16 @@ namespace Chuckinator.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Joke>(content);
+                    return new Success<Joke>(JsonConvert.DeserializeObject<Joke>(content));
                 }
             } 
-            catch (Exception ex)
+            catch
             {
-                //TODO something here
+                //TODO log something for posterity
             }            
 
-            return null;
+            // if we got this far something went wrong
+            return new Error();
         }
     }
 }
