@@ -21,5 +21,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+	<InternalsVisibleTo Include="Chuckinator.Tests" />
+  </ItemGroup>
 
 </Project>
